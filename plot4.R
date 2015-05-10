@@ -1,6 +1,11 @@
+#Program to create a histogram and three line plots arranged in a 2 x 2 square
+#See coding comments in plot1.R and plot3.R for details.
+
+#Read the data and copy the data that falls within the date range to variable "a"
 data <- read.table("household_power_consumption.txt", header=FALSE,
                    sep=";", skip=1, stringsAsFactors=FALSE)
 a <- subset(data, data[ ,1] == "1/2/2007" | data[ ,1] == "2/2/2007")
+
 a[a[ ,3] == "?", 3] <- NA
 a[a[ ,7] == "?", 7] <- NA
 a[a[ ,8] == "?", 8] <- NA
@@ -11,6 +16,8 @@ xAxisLabels <- c(substr(weekdays(firstTickDate), 1, 3),
                  substr(weekdays(firstTickDate + 2), 1, 3))
 
 png(filename = "Plot4.png", width=480, height=480)
+
+#mfcol=c(2,2) parameter of "par" will cause plots to be filled by column.
 par(mfcol=c(2,2), mar=c(4, 5, 5, 1), mgp=c(3, 0.6, 0), 
     cex.axis=0.9, cex.label=0.9, tck=-0.04)
 
